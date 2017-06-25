@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+       <category
+           id="nspyre.egf.portfolio.task.general.ui.launches.definition"
+           name="Launch definitions"
+           description="This category contains commands to define launches for generic EGF projects.">
+       </category>
+      <command
+            categoryId="nspyre.egf.portfolio.task.general.ui.launches.definition"
+            description="This command executes a selected EGF Activity as WorkspaceJob."
+            id="nspyre.egf.portfolio.task.general.ui.launches.RunActivityAsWorkspaceJob"
+            name="Run Activity as WorkspaceJob">
+      </command>
+      <command
+            categoryId="nspyre.egf.portfolio.task.general.ui.launches.definition"
+            description="This command executes a selected EGF Activity via ActivityManager."
+            id="nspyre.egf.portfolio.task.general.ui.launches.RunActivityViaManager"
+            name="Run Activity via ActivityManager">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="nspyre.egf.portfolio.task.general.ui.launches.RunActivityAsWorkspaceJob"
+            class="dt.egf.utils.launch.RunSelectedEGFActivityAsWorkspaceJob">
+      </handler>
+      <handler
+            commandId="nspyre.egf.portfolio.task.general.ui.launches.RunActivityViaManager"
+            class="dt.egf.utils.launch.RunSelectedEGFActivityViaManager">
+      </handler>
+   </extension>
+
+  <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="nspyre.egf.portfolio.task.general.ui.contextMenu"
+               label="Altran EGF"
+               icon="icons/runactivity.gif"
+               >
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="nspyre.egf.portfolio.task.general.ui.isEGFActivity">
+               </reference>
+            </visibleWhen>
+         </menu>
+      </menuContribution>
+       <menuContribution
+            allPopups="false"
+            locationURI="popup:nspyre.egf.portfolio.task.general.ui.contextMenu?after=additions">
+         <command
+               commandId="nspyre.egf.portfolio.task.general.ui.launches.RunActivityAsWorkspaceJob"
+               icon="icons/runactivity.gif"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="nspyre.egf.portfolio.task.general.ui.isEGFActivity">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+       <menuContribution
+            allPopups="false"
+            locationURI="popup:nspyre.egf.portfolio.task.general.ui.contextMenu?after=additions">
+         <command
+               commandId="nspyre.egf.portfolio.task.general.ui.launches.RunActivityViaManager"
+               icon="icons/runactivity.gif"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="nspyre.egf.portfolio.task.general.ui.isEGFActivity">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition id="nspyre.egf.portfolio.task.general.ui.isEGFActivity">
+         <with
+               variable="activeMenuSelection">
+            <and>
+               <count
+                     value="1">
+               </count>
+               <iterate>
+                    <instanceof
+                          value="org.eclipse.egf.model.fcore.Activity">
+                    </instanceof>
+               </iterate>
+            </and>
+         </with>
+      </definition>
+      <definition id="nspyre.egf.portfolio.task.general.ui.isEGFActivityY">
+            <count
+                  value="1">
+            </count>
+      </definition>
+   </extension>
+   <extension
+         point="org.eclipse.egf.core.fcore">
+      <fcore
+            id="egf/general.fcore">
+      </fcore>
+   </extension>
+
+
+</plugin>

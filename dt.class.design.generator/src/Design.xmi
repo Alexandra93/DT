@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<design:Design
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:design="http://www.example.org/design"
+    xsi:schemaLocation="http://www.example.org/design metamodel/design.ecore">
+  <elements
+      xsi:type="design:Class"
+      name="a">
+    <attributes
+        name="aa"
+        type="boolean"/>
+  </elements>
+  <elements
+      xsi:type="design:Interface"
+      name="b">
+    <attributes
+        name="r"
+        type="boolean"/>
+  </elements>
+  <elements
+      xsi:type="design:Class"
+      name="C"/>
+  <elements
+      xsi:type="design:Class"
+      name="D"/>
+  <elements
+      xsi:type="design:Class"
+      name="E"/>
+  <relations
+      xsi:type="design:Realization"
+      source="//@elements.0"
+      target="//@elements.1"/>
+  <relations
+      xsi:type="design:Dependency"
+      source="//@elements.0"
+      target="//@elements.2"/>
+  <relations
+      xsi:type="design:Aggregation"
+      source="//@elements.0"
+      target="//@elements.2"/>
+  <relations
+      xsi:type="design:Dependency"
+      source="//@elements.2"
+      target="//@elements.0"/>
+  <relations
+      xsi:type="design:Composition"
+      source="//@elements.0"
+      target="//@elements.3"/>
+  <relations
+      xsi:type="design:Association"
+      source="//@elements.0"
+      target="//@elements.4"/>
+</design:Design>

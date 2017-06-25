@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<workflow>
+
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+		<platformUri value="${workspaceRoot}"/>
+	</bean>
+
+	<!-- instantiate metamodel -->
+	<bean id="mm_emf" class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="${modelFile}" />
+		<modelSlot value="model" />
+	</component>
+
+    <!-- Clear output directory -->
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner">
+			<directory value="${srcGenPath}"/>
+	</component>
+
+	<!-- check model
+	<component class="org.eclipse.xtend.check.CheckComponent">
+		<metaModel idRef="mm_emf"/>
+		<checkFile value="metamodel::Checks" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+	-->
+	<!--  generate code -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<expand
+			value="template::Template::main FOR model" />
+		<outlet path="${srcGenPath}" >
+			<postprocessor class="org.eclipse.xpand2.output.JavaBeautifier"/>
+		</outlet>
+		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
+			<fileEncoding value="ISO-8859-1"/>
+		</resourceManager>
+	</component>
+</workflow>

@@ -1,0 +1,49 @@
+«IMPORT workflow»
+«IMPORT dt::workflow::generator::template»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE main FOR CompilationUnit»
+
+«IF language.toString()=="Java"-»
+«FILE name + ".java"-»
+/* Generated at «timestamp()» */
+
+«IF !this.declarations.Body.Statement.select(e | e.metaType.name.toString() == "workflow::Read").isEmpty-»
+import java.util.Scanner;
+«ENDIF-»
+
+public class «name»{
+«EXPAND TemplateJava::ProcDeclJava FOREACH declarations»
+}
+«ENDFILE-»
+«ELSEIF language.toString()=="CS"-»
+«FILE name + ".cs"-»
+/* Generated at «timestamp()» */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace «name»{
+
+	class «name»{
+		«EXPAND TemplateCS::ProcDeclCS FOREACH declarations»
+	}
+}
+«ENDFILE-»
+«ELSEIF language.toString()=="Python"-»
+«FILE name + ".py"-»
+# Generated at «timestamp()»
+«EXPAND TemplatePython::ProcDeclPython FOREACH declarations»
+«ENDFILE-»
+«ELSEIF language.toString()=="CPP"-»
+«FILE name + ".cpp"-»
+/* Generated at «timestamp()» */
+«EXPAND TemplateCPP::ProcDeclCPP FOREACH declarations»
+«ENDFILE-»
+«ENDIF»
+
+«ENDDEFINE»

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore"
+    xmlns:fprod="http://www.eclipse.org/egf/1.0.0/fprod" xmlns:ftask="http://www.eclipse.org/egf/1.0.0/ftask"
+    xmlns:types="http://www.eclipse.org/egf/1.0.0/types">
+  <fcore:FactoryComponent xmi:id="_iFZfwFGyEeexQMyTVIP4WQ" name="workflow.generation">
+    <contractContainer xmi:id="_UwAooFHWEeecfqr-dxI0Xw">
+      <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_VY50oFHWEeecfqr-dxI0Xw"
+          name="modelFileURIstring" mandatory="true" invocationContracts="#_P_0QEFHWEeecfqr-dxI0Xw #_XPP9IFHUEeecfqr-dxI0Xw">
+        <type xmi:type="types:TypeString" xmi:id="_YobrsFHWEeecfqr-dxI0Xw" value="/NewWorkflowProject/NewWorkflowProject.workflow"/>
+      </contracts>
+    </contractContainer>
+    <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_VUjLAFHUEeecfqr-dxI0Xw">
+      <invocations xmi:id="_6kcToFHVEeecfqr-dxI0Xw" name="Compose src path" invokedActivity="#_AWMnIFHnEeecfqr-dxI0Xw">
+        <invocationContractContainer xmi:id="_PsqDgFHWEeecfqr-dxI0Xw">
+          <invocationContracts xmi:id="_P_0QEFHWEeecfqr-dxI0Xw" factoryComponentContract="#_VY50oFHWEeecfqr-dxI0Xw"
+              invokedContract="#_GvwKMFHnEeecfqr-dxI0Xw"/>
+          <invocationContracts xmi:id="_QyzzQFHWEeecfqr-dxI0Xw" description="" targetInvocationContract="#_jgcXEFHWEeecfqr-dxI0Xw"
+              invokedContract="#_I17MgFHnEeecfqr-dxI0Xw"/>
+          <invocationContracts xmi:id="_zoEnUFHpEeePCJsbk3EZdA" targetInvocationContract="#_sw3pgFHqEeePCJsbk3EZdA"
+              invokedContract="#_ID8V8FHnEeecfqr-dxI0Xw"/>
+          <invocationContracts xmi:id="_0ox2YFHpEeePCJsbk3EZdA" targetInvocationContract="#_scvMkFHqEeePCJsbk3EZdA #_BslTYFJ4EeejfNX4phCtHQ"
+              invokedContract="#_JYXLMFHnEeecfqr-dxI0Xw"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_PWPXgFHqEeePCJsbk3EZdA" name="Create src path if not present yet"
+          invokedActivity="ftask:Task platform:/plugin/dt.egf.utils/egf/general.fcore#_f5VWYFHqEeePCJsbk3EZdA">
+        <invocationContractContainer xmi:id="_sL7JYFHqEeePCJsbk3EZdA">
+          <invocationContracts xmi:id="_scvMkFHqEeePCJsbk3EZdA" sourceInvocationContract="#_0ox2YFHpEeePCJsbk3EZdA"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_ktH1gFHqEeePCJsbk3EZdA"/>
+          <invocationContracts xmi:id="_sw3pgFHqEeePCJsbk3EZdA" sourceInvocationContract="#_zoEnUFHpEeePCJsbk3EZdA"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_k-WvcFHqEeePCJsbk3EZdA"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_VsTjsFHUEeecfqr-dxI0Xw" name="Run workflow" invokedActivity="#_xr9z4FHREeecfqr-dxI0Xw">
+        <invocationContractContainer xmi:id="_W8YEcFHUEeecfqr-dxI0Xw">
+          <invocationContracts xmi:id="_XPP9IFHUEeecfqr-dxI0Xw" factoryComponentContract="#_VY50oFHWEeecfqr-dxI0Xw"
+              invokedContract="#_E3NO0FHUEeecfqr-dxI0Xw"/>
+          <invocationContracts xmi:id="_jgcXEFHWEeecfqr-dxI0Xw" sourceInvocationContract="#_QyzzQFHWEeecfqr-dxI0Xw"
+              invokedContract="#_vIcXIFHlEeecfqr-dxI0Xw"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_lduQ8FJ3EeejfNX4phCtHQ" name="Refresh Project" invokedActivity="ftask:Task platform:/plugin/dt.egf.utils/egf/general.fcore#_tXXtwFJ3EeejfNX4phCtHQ">
+        <invocationContractContainer xmi:id="_BWg8wFJ4EeejfNX4phCtHQ">
+          <invocationContracts xmi:id="_BslTYFJ4EeejfNX4phCtHQ" sourceInvocationContract="#_0ox2YFHpEeePCJsbk3EZdA"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_6xXNsFJ3EeejfNX4phCtHQ"/>
+        </invocationContractContainer>
+      </invocations>
+    </orchestration>
+  </fcore:FactoryComponent>
+  <fcore:FactoryComponent xmi:id="_AWMnIFHnEeecfqr-dxI0Xw" name="dt.helper.reconstructUri.toSrcPath">
+    <contractContainer xmi:id="_FLYNYFHnEeecfqr-dxI0Xw">
+      <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_GvwKMFHnEeecfqr-dxI0Xw"
+          name="uri" mandatory="true" invocationContracts="#_I1WygFHsEeePCJsbk3EZdA">
+        <type xmi:type="types:TypeString" xmi:id="_MkNcIFHnEeecfqr-dxI0Xw"/>
+      </contracts>
+      <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_JYXLMFHnEeecfqr-dxI0Xw"
+          name="projectName" mode="In_Out" invocationContracts="#_l5VNIFHuEeePCJsbk3EZdA">
+        <type xmi:type="types:TypeString" xmi:id="_NLEn0FHnEeecfqr-dxI0Xw"/>
+      </contracts>
+      <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_I17MgFHnEeecfqr-dxI0Xw"
+          name="srcGenPath" mode="Out" invocationContracts="#_YxopAFHsEeePCJsbk3EZdA">
+        <type xmi:type="types:TypeString" xmi:id="_NwwHwFHnEeecfqr-dxI0Xw"/>
+      </contracts>
+      <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_ID8V8FHnEeecfqr-dxI0Xw"
+          name="srcGenProjectSubPath" mode="Out" invocationContracts="#_YZo_wFHsEeePCJsbk3EZdA">
+        <type xmi:type="types:TypeString" xmi:id="_OSsXMFHnEeecfqr-dxI0Xw"/>
+      </contracts>
+    </contractContainer>
+    <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_j6QYsFHrEeePCJsbk3EZdA">
+      <invocations xmi:id="_kdVQkFHrEeePCJsbk3EZdA" invokedActivity="ftask:Task platform:/plugin/dt.egf.utils/egf/general.fcore#_2tywMFHrEeePCJsbk3EZdA">
+        <invocationContractContainer xmi:id="_IcMEkFHsEeePCJsbk3EZdA">
+          <invocationContracts xmi:id="_I1WygFHsEeePCJsbk3EZdA" factoryComponentContract="#_GvwKMFHnEeecfqr-dxI0Xw"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_9PgwwFHrEeePCJsbk3EZdA"/>
+          <invocationContracts xmi:id="_l5VNIFHuEeePCJsbk3EZdA" factoryComponentContract="#_JYXLMFHnEeecfqr-dxI0Xw"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_A-mKQFHvEeePCJsbk3EZdA"/>
+          <invocationContracts xmi:id="_LByN0FHsEeePCJsbk3EZdA" targetInvocationContract="#_XZ6oIFHsEeePCJsbk3EZdA"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_9lHNUFHrEeePCJsbk3EZdA"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_UAjfoFHsEeePCJsbk3EZdA" invokedActivity="#_psK3gFHsEeePCJsbk3EZdA">
+        <invocationContractContainer xmi:id="_WymwgFHsEeePCJsbk3EZdA">
+          <invocationContracts xmi:id="_XZ6oIFHsEeePCJsbk3EZdA" sourceInvocationContract="#_LByN0FHsEeePCJsbk3EZdA"
+              invokedContract="platform:/plugin/dt.egf.utils/egf/general.fcore#_9PgwwFHrEeePCJsbk3EZdA"/>
+          <invocationContracts xmi:id="_YxopAFHsEeePCJsbk3EZdA" factoryComponentContract="#_I17MgFHnEeecfqr-dxI0Xw"
+              invokedContract="#_x-14UFHsEeePCJsbk3EZdA"/>
+          <invocationContracts xmi:id="_YZo_wFHsEeePCJsbk3EZdA" factoryComponentContract="#_ID8V8FHnEeecfqr-dxI0Xw"
+              invokedContract="#_xc3zsFHsEeePCJsbk3EZdA"/>
+        </invocationContractContainer>
+      </invocations>
+    </orchestration>
+  </fcore:FactoryComponent>
+  <ftask:Task xmi:id="_xr9z4FHREeecfqr-dxI0Xw" name="dt.helper.run.WorkflowFile.mwe"
+      kind="java" implementation="dt.egf.utils.workflow.MweWorkflowRunner">
+    <contractContainer xmi:id="_rKKB0FHTEeecfqr-dxI0Xw">
+      <contracts xmi:id="_ri1nkFHTEeecfqr-dxI0Xw" name="mwe" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_wPgLAFHTEeecfqr-dxI0Xw" value="dt.workflow.generator/src/workflow/generator.mwe"/>
+      </contracts>
+      <contracts xmi:id="_E3NO0FHUEeecfqr-dxI0Xw" name="modelFile" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_GdCkMFHUEeecfqr-dxI0Xw"/>
+      </contracts>
+      <contracts xmi:id="_vIcXIFHlEeecfqr-dxI0Xw" name="srcGenPath" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_6vGRMFHlEeecfqr-dxI0Xw"/>
+      </contracts>
+    </contractContainer>
+  </ftask:Task>
+  <ftask:Task xmi:id="_psK3gFHsEeePCJsbk3EZdA" name="dt.helper.reconstructURIString.withSrcPath"
+      kind="java" superTask="platform:/plugin/dt.egf.utils/egf/general.fcore#_2tywMFHrEeePCJsbk3EZdA">
+    <contractContainer xmi:id="_se_kcFHsEeePCJsbk3EZdA">
+      <contracts xmi:id="_xc3zsFHsEeePCJsbk3EZdA" name="srcGenProjectSubPath" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_2Ls6UFHsEeePCJsbk3EZdA" value="src-gen"/>
+      </contracts>
+      <contracts xmi:id="_x-14UFHsEeePCJsbk3EZdA" name="srcGenPath" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_2si9kFHsEeePCJsbk3EZdA" value="${projectPath}/${srcGenProjectSubPath}"/>
+      </contracts>
+    </contractContainer>
+  </ftask:Task>
+</xmi:XMI>

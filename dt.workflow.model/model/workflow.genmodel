@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/dt.workflow.model/src" modelPluginID="dt.workflow.model"
+    modelName="Workflow" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>workflow.ecore</foreignModel>
+  <genPackages prefix="Workflow" disposableProviderFactory="true" ecorePackage="workflow.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="workflow.ecore#//Languages">
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Languages/Java"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Languages/CS"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Languages/Python"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Languages/CPP"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="workflow.ecore#//Type">
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/int"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/long"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/double"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/float"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/string"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//Type/void"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="workflow.ecore#//AccessModifiers">
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//AccessModifiers/default"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//AccessModifiers/public"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//AccessModifiers/protected"/>
+      <genEnumLiterals ecoreEnumLiteral="workflow.ecore#//AccessModifiers/private"/>
+    </genEnums>
+    <genClasses ecoreClass="workflow.ecore#//CompilationUnit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//CompilationUnit/declarations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//CompilationUnit/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//CompilationUnit/language"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="workflow.ecore#//Statement"/>
+    <genClasses ecoreClass="workflow.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//Block/Statement"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//If">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//If/Condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//If/Body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//If/Alternative"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//While">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//While/Condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//While/Body"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//VariableAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//VariableAssignment/LValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//VariableAssignment/RValue"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//ProcedureReturn">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//ProcedureReturn/Expression"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//Write">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//Write/wVar"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//Read">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//Read/rVar"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Read/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="workflow.ecore#//Declaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Declaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//VariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//VariableDeclaration/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//VariableDeclaration/isConstant"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//ProcedureDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//ProcedureDeclaration/Variables"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//ProcedureDeclaration/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//ProcedureDeclaration/Body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//ProcedureDeclaration/Parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//ProcedureDeclaration/accessModifier"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="workflow.ecore#//Expression"/>
+    <genClasses ecoreClass="workflow.ecore#//Constant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Constant/asBoolean"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Constant/asInteger"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Constant/asReal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Constant/asString"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//ProcedureCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//ProcedureCall/Argument"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//ProcedureCall/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="workflow.ecore#//UnaryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//UnaryExpression/Operand"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//Not"/>
+    <genClasses ecoreClass="workflow.ecore#//UMinus"/>
+    <genClasses image="false" ecoreClass="workflow.ecore#//BinaryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//BinaryExpression/Operand1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//BinaryExpression/Operand2"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="workflow.ecore#//LogicExpression"/>
+    <genClasses ecoreClass="workflow.ecore#//And"/>
+    <genClasses ecoreClass="workflow.ecore#//Or"/>
+    <genClasses image="false" ecoreClass="workflow.ecore#//EqualityExpression"/>
+    <genClasses ecoreClass="workflow.ecore#//Equal"/>
+    <genClasses ecoreClass="workflow.ecore#//GreaterThan"/>
+    <genClasses ecoreClass="workflow.ecore#//LessThan"/>
+    <genClasses ecoreClass="workflow.ecore#//GreaterThanOrEqual"/>
+    <genClasses ecoreClass="workflow.ecore#//LessThanOrEqual"/>
+    <genClasses image="false" ecoreClass="workflow.ecore#//ArithmeticExpression"/>
+    <genClasses ecoreClass="workflow.ecore#//Addition"/>
+    <genClasses ecoreClass="workflow.ecore#//Subtraction"/>
+    <genClasses ecoreClass="workflow.ecore#//Multiplication"/>
+    <genClasses ecoreClass="workflow.ecore#//Division"/>
+    <genClasses ecoreClass="workflow.ecore#//ParameterDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//ParameterDeclaration/type"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workflow.ecore#//Variable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="workflow.ecore#//NotEqual"/>
+  </genPackages>
+</genmodel:GenModel>

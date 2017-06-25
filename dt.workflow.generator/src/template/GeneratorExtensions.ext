@@ -1,0 +1,40 @@
+String comparisonOperator( workflow::EqualityExpression comparisonOperator):
+	switch 
+	{ 
+		case comparisonOperator.metaType.toString() == "workflow::Equal" : '=='
+		case comparisonOperator.metaType.toString() == "workflow::NotEqual" : '!='
+		case comparisonOperator.metaType.toString() == "workflow::LessThan": '<'
+	    case comparisonOperator.metaType.toString() == "workflow::GreaterThan": '>'
+	    case comparisonOperator.metaType.toString() == "workflow::LessThanOrEqual": '<='
+	    case comparisonOperator.metaType.toString() == "workflow::GreaterThanOrEqual": '>='
+	    default : 'not defined'
+	};
+	
+String arithmeticOperator( workflow::ArithmeticExpression arithmeticOperator):
+	switch 
+	{ 
+		case arithmeticOperator.metaType.toString() == "workflow::Addition" : '+'
+		case arithmeticOperator.metaType.toString() == "workflow::Substraction": '-'
+	    case arithmeticOperator.metaType.toString() == "workflow::Multiplication": '/'
+	    case arithmeticOperator.metaType.toString() == "workflow::Division": '*'
+	    default : 'not defined'
+	};
+
+String logicalOperator( workflow::LogicExpression logicalOperator ):
+	switch 
+	{ 
+		case logicalOperator.metaType.toString() == "workflow::And" : '&&'
+		case logicalOperator.metaType.toString() == "workflow::Or": '||'
+	    default : 'not defined'
+	};
+	
+String unaryOperator( workflow::UnaryExpression unaryOperator ):
+	switch 
+	{ 
+		case unaryOperator.metaType.toString() == "workflow::Not" : '!'
+		case unaryOperator.metaType.toString() == "workflow::UMinus": '-'
+	    default : 'not defined'
+	};
+
+String timestamp():
+	JAVA utils.TemplateUtils.timestamp();

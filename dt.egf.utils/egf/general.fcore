@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ftask="http://www.eclipse.org/egf/1.0.0/ftask"
+    xmlns:types="http://www.eclipse.org/egf/1.0.0/types">
+  <ftask:Task xmi:id="_f5VWYFHqEeePCJsbk3EZdA" name="general.CreateProjectSubPath"
+      kind="java" implementation="dt.egf.utils.workflow.CreateProjectPath">
+    <contractContainer xmi:id="_kdk9oFHqEeePCJsbk3EZdA">
+      <contracts xmi:id="_ktH1gFHqEeePCJsbk3EZdA" name="projectName" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_myLdgFHqEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_k-WvcFHqEeePCJsbk3EZdA" name="projectSubPath" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_pRGXAFHqEeePCJsbk3EZdA"/>
+      </contracts>
+    </contractContainer>
+  </ftask:Task>
+  <ftask:Task xmi:id="_2tywMFHrEeePCJsbk3EZdA" name="general.reconstrucURIString"
+      kind="java" superTask="#_1g4w0FHuEeePCJsbk3EZdA" implementation="dt.egf.utils.workflow.ReconstructUri">
+    <contractContainer xmi:id="_81UvIFHrEeePCJsbk3EZdA">
+      <contracts xmi:id="_9PgwwFHrEeePCJsbk3EZdA" name="uri" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_-yKPQFHrEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_9lHNUFHrEeePCJsbk3EZdA" name="URIConstructionResult" mandatory="true"
+          mode="Out">
+        <type xmi:type="types:TypeString" xmi:id="_DGgZUFHsEeePCJsbk3EZdA"/>
+      </contracts>
+    </contractContainer>
+  </ftask:Task>
+  <ftask:Task xmi:id="_1g4w0FHuEeePCJsbk3EZdA" name="general.reconstructURI.abstract"
+      kind="java" implementation="dt.egf.utils.workflow.ReconstructUri">
+    <contractContainer xmi:id="_7tyX8FHuEeePCJsbk3EZdA">
+      <contracts xmi:id="__9qRsFHuEeePCJsbk3EZdA" name="scheme" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_CTjLAFHvEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_Am0jcFHvEeePCJsbk3EZdA" name="protocol" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_HwEeEFHvEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_A32pEFHvEeePCJsbk3EZdA" name="fileExtension" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_IZOv0FHvEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_A-mKQFHvEeePCJsbk3EZdA" name="projectName" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_K3wnwFHvEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_BFe1YFHvEeePCJsbk3EZdA" name="fileBaseName" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_M984MFHvEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_BMe1QFHvEeePCJsbk3EZdA" name="projectSubPath" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_PFfMcFHvEeePCJsbk3EZdA"/>
+      </contracts>
+      <contracts xmi:id="_BW0dAFHvEeePCJsbk3EZdA" name="fileSubName" mode="In_Out">
+        <type xmi:type="types:TypeString" xmi:id="_Tw9dEFHvEeePCJsbk3EZdA"/>
+      </contracts>
+    </contractContainer>
+  </ftask:Task>
+  <ftask:Task xmi:id="_tXXtwFJ3EeejfNX4phCtHQ" name="general.refreshProject" kind="java"
+      implementation="dt.egf.utils.workflow.RefreshProject">
+    <contractContainer xmi:id="_6dEYsFJ3EeejfNX4phCtHQ">
+      <contracts xmi:id="_6xXNsFJ3EeejfNX4phCtHQ" name="projectName" mandatory="true">
+        <type xmi:type="types:TypeString" xmi:id="_-DS4gFJ3EeejfNX4phCtHQ"/>
+      </contracts>
+    </contractContainer>
+  </ftask:Task>
+</xmi:XMI>

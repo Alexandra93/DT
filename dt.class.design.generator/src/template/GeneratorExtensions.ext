@@ -1,0 +1,30 @@
+import design;
+
+String timestamp():
+	JAVA utils.TemplateUtils.timestamp();
+
+getter(Attribute this) :
+	"get"+name.toFirstUpper();
+	
+setter(Attribute this) :
+	"set"+name.toFirstUpper();
+
+String classifier(Classifier cls):
+switch 
+	{ 
+		case cls.metaType.toString() == "design::Class" : 'class'
+		case cls.metaType.toString() == "design::Interface" : 'interface'
+	    default : 'not defined'
+	};
+	
+String defaultValue(Type type):
+switch 
+	{ 
+		case type.toString()=="int": '0'
+		case type.toString()=="long": '0'
+		case type.toString()=="double": '0'
+		case type.toString()=="float": '0'
+		case type.toString()=="String": '" "'
+		case type.toString()=="boolean": 'false'
+	    default : 'not defined'
+	};

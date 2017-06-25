@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<workflow>
+	<!-- Optional: when many properties to set or user to set properties, 
+	     this can be used. -->
+	<!-- don't use now: let egf task read properties file if wanted.
+    <property file="${workspaceRoot}${workflowFile}"/>
+	-->
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup">
+	    <platformUri value="${workspaceRoot}"/>
+	    <!-- Register URI mappings ?-->
+	    <!--uriMap from="platform:/plugin/asml.lace.generator/" to="file:${mweBundleRoot}/" /-->
+	    
+	    <!-- Register Extension mappings ?-->
+	    <!--extensionMap from="ddf" to="org.eclipse.xtext.resource.XtextResourceFactory" /-->
+	    <!--extensionMap from="ddf" to="org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider" /-->
+	    <!-- Register generated models that we refer to 
+	         The value is the java package.Class name of the
+	         generated EPackage
+	    -->
+	    <!--
+	    <registerGeneratedEPackage value="asml.dsl.ddf.ddf.DdfPackage"/>
+	    -->
+	    <!-- Register dynamic ecore models to use -->
+	    <!-- This doesn't seem to use the uriMap entries, so use path directly -->
+	    <!--registerEcoreFile value="file:${mweBundleRoot}/models/DdfContainer.ecore"/-->
+	</bean>
+	 
+	<!-- instantiate metamodel to allow for reading dynamic models -->
+	<bean id="mm_emf" class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+
+	<component class ="org.eclipse.emf.mwe.utils.Reader">
+		<!-- Use model reference in platform:/resource ... format -->
+		<uri value="${xsplatformModelFile}"/>
+        <modelSlot value="model"/>
+    </component>
+
+<!-- We may have generated ddf files before: need cleaning?
+     Perhaps delegate this to other workflow
+	<component class ="org.eclipse.emf.mwe.utils.DirectoryCleaner">
+		<directory value="${srcGenPath}"/>
+    </component>
+-->
+    
+    <!-- prepare for performing uml -->
+    <bean class="org.eclipse.xtend.typesystem.uml2.Setup"/>
+
+	<component class ="asml.dsl.ddf.ext.generator.Reader">
+		<uriFilter class="org.eclipse.xtext.mwe.NameBasedFilter">
+     		<extension value="ddf"/>
+		</uriFilter>
+	    <path value="${ddfPaths}"/>
+	    <!-- Use conditional standalone setup when workflow may also run
+	         in some Eclipse context (e.g. EGF)
+	      -->
+		<register class="asml.dsl.ddf.DdfConditionalStandaloneSetup">
+		</register>
+		<loadResource>
+	    	<slot value="ddfModel"/>		
+     	</loadResource>
+		<types value="TypeDefinition;MethodDeclaration;EnumDefinition;StructDefinition;UnionDefinition;InterfaceDefinition;ArrayDefinition"/>		
+		<validate class="asml.dsl.ddf.ext.generator.NullValidator"/>		
+    </component>
+
+	<component class ="org.eclipse.xtend.util.stdlib.ExtIssueReporter"/>
+
+	<component class ="org.eclipse.xpand2.Generator">
+	    <fileEncoding value="ISO-8859-1"/>
+		<metaModel idRef="mm_emf"/>
+   		<globalVarDef>
+     		<name value="ddfModel"/>		
+     		<value value="ddfModel"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="typeDefinition"/>		
+     		<value value="typeDefinition"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="methodDeclaration"/>		
+     		<value value="methodDeclaration"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="enumDefinition"/>		
+     		<value value="enumDefinition"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="structDefinition"/>		
+     		<value value="structDefinition"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="unionDefinition"/>		
+     		<value value="unionDefinition"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="interfaceDefinition"/>		
+     		<value value="interfaceDefinition"/>
+   		</globalVarDef>
+   		<globalVarDef>
+     		<name value="arrayDefinition"/>		
+     		<value value="arrayDefinition"/>
+   		</globalVarDef>
+		
+		<expand value="asml::lace::generator::xpand::templates::LogicalActionComponent::TLogicalActionComponent FOR model"/>
+		<outlet path = "${srcGenPath}">
+			<postprocessor class="nspyre.asml.beautifier.cdt.CppBeautifier" configFile="${mweBundleRoot}/bin/asml/lace/generator/workflow/beautify.xml"/>
+		</outlet>
+		
+		
+		<outlet name="BLD_OUTLET" path="${bldPath}">
+		</outlet>
+		<outlet name="MAN_OUTLET" path="${srcManPath}/">
+		</outlet>
+		
+		<prSrcPaths value="${srcGenPath},${srcManPath}" />	
+		
+    </component>
+</workflow>

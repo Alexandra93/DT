@@ -1,0 +1,110 @@
+«IMPORT workflow»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE ProcDeclCS FOR ProcedureDeclaration»
+«IF accessModifier.toString()!="default"»«accessModifier»«ENDIF» «returnType» «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR iter» «param.type» «param.name» «IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»«ENDIF»){
+«IF !Variables.isEmpty» «FOREACH Variables AS var ITERATOR iter» «IF var.isConstant» final «ENDIF» «var.type» «var.name»;«ENDFOREACH»«ENDIF»
+«IF Block.name.length!=0 && !Body.Statement.isEmpty» «EXPAND statement FOREACH Body.Statement» } «ELSE» } «ENDIF»
+«ENDDEFINE»
+
+«DEFINE statement FOR Statement»
+«ENDDEFINE»
+
+«DEFINE statement FOR EqualityExpression-»
+«EXPAND operand FOR this.Operand1-» «comparisonOperator()-» «EXPAND operand FOR this.Operand2-» 
+«ENDDEFINE-»
+
+«DEFINE statement FOR ArithmeticExpression-»
+«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-» 
+«ENDDEFINE-»
+
+«DEFINE statement FOR LogicExpression-»
+«EXPAND operand FOR this.Operand1-» «logicalOperator()-» «EXPAND operand FOR this.Operand2-» 
+«ENDDEFINE-»
+
+«DEFINE statement FOR UnaryExpression-»
+«unaryOperator()-»«EXPAND operand FOR this.Operand-»
+«ENDDEFINE-»
+
+«DEFINE statement FOR VariableAssignment-»
+		«EXPAND operand FOR LValue-» = «EXPAND operand FOR RValue-»;
+«ENDDEFINE-»
+
+«DEFINE statement FOR Read-»
+«IF type.toString() == "int"-» 
+	«type» «rVar.name» = Convert.ToInt32(Console.ReadLine());
+«ELSEIF type.toString() == "long"-» 
+	«type» «rVar.name» = long.Parse(Console.ReadLine());
+«ELSEIF type.toString() == "double"-» 
+	«type» «rVar.name» = Convert.ToDouble(Console.ReadLine());
+«ELSEIF type.toString() == "float"-» 
+	«type» «rVar.name» = float.Parse(Console.ReadLine());
+«ELSEIF type.toString() == "string"-» 
+	«type» «rVar.name» = Convert.ToString(Console.ReadLine());
+«ELSEIF type.toString() == "boolean"-» 
+	Boolean «rVar.name» = Convert.ToBoolean(Console.ReadLine());
+«ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE statement FOR Write-»
+	Console.WriteLine(«wVar.name»);
+«ENDDEFINE-»
+
+«DEFINE statement FOR ProcedureCall-»
+«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»);
+«ENDDEFINE-»
+
+«DEFINE statement FOR ProcedureReturn-»
+return «EXPAND operand FOR Expression-»;
+«ENDDEFINE-»
+
+«DEFINE statement FOR If»
+	if(«EXPAND statement FOR Condition-»){
+		«EXPAND statement FOREACH Body.Statement-»
+	}
+«IF !Alternative.Statement.isEmpty»
+	else{
+		«EXPAND statement FOREACH Alternative.Statement-»«ENDIF-»
+	}
+«ENDDEFINE-»
+
+«DEFINE statement FOR While»
+while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statement-»
+}
+«ENDDEFINE»
+
+«DEFINE operand FOR Expression-»
+«ENDDEFINE-»
+
+«DEFINE operand FOR Variable-»
+«this.name-»
+«ENDDEFINE-»
+
+«DEFINE operand FOR Constant-»
+«IF asInteger.length != 0» «asInteger-»
+«ELSEIF asReal.length != 0» «asReal.asInteger()-»
+«ELSEIF asString.length != 0» «asString-»
+«ELSE» «asBoolean.toString()-»
+«ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE operand FOR EqualityExpression-»
+(«EXPAND operand FOR this.Operand1-» «comparisonOperator()-» «EXPAND operand FOR this.Operand2-») 
+«ENDDEFINE-»
+
+«DEFINE operand FOR ArithmeticExpression-»
+(«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-»)
+«ENDDEFINE-»
+
+«DEFINE operand FOR LogicExpression-»
+(«EXPAND operand FOR this.Operand1-» «logicalOperator()-» «EXPAND operand FOR this.Operand2-»)
+«ENDDEFINE-»
+
+«DEFINE operand FOR ProcedureCall»
+«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»)
+«ENDDEFINE-»
+
+«DEFINE operand FOR UnaryExpression-»
+«unaryOperator()-»«EXPAND operand FOR this.Operand-»
+«ENDDEFINE-»
