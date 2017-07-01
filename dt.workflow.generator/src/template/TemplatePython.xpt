@@ -3,9 +3,12 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE ProcDeclPython FOR ProcedureDeclaration»
-«IF accessModifier.toString()!="default"»«accessModifier»«ENDIF» «returnType» «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR iter» «param.type» «param.name» «IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»«ENDIF»){
-«IF !Variables.isEmpty» «FOREACH Variables AS var ITERATOR iter» «IF var.isConstant» final «ENDIF» «var.type» «var.name»;«ENDFOREACH»«ENDIF»
-«IF Block.name.length!=0 && !Body.Statement.isEmpty» «IF !Body.Statement.select(e | e.metaType.name.toString() == "workflow::Read").isEmpty» Scanner reader = new Scanner(System.in); «ENDIF» «EXPAND statement FOREACH Body.Statement» } «ELSE» } «ENDIF»
+def «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR iter» «param.name»: «typesInPython(param.type)»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»«ENDIF»):
+«IF !Variables.isEmpty» «FOREACH Variables AS var ITERATOR iter» 
+«var.name» : «var.type» 
+«ENDFOREACH-»
+«ENDIF-»
+«IF Block.name.length!=0 && !Body.Statement.isEmpty» «EXPAND statement FOREACH Body.Statement» «ENDIF»
 «ENDDEFINE»
 
 «DEFINE statement FOR Statement»
@@ -28,45 +31,49 @@
 «ENDDEFINE-»
 
 «DEFINE statement FOR VariableAssignment-»
-«EXPAND operand FOR LValue» = «EXPAND operand FOR RValue-»;
+	«EXPAND operandVA FOR LValue-» = «EXPAND operand FOR RValue-»
 «ENDDEFINE-»
 
 «DEFINE statement FOR Read-»
 «IF type.toString() == "int"-» 
-«type» «rVar.name» = reader.nextInt();
+	«rVar.name» = int(input())
 «ELSEIF type.toString() == "long"-» 
-«type» «rVar.name» = reader.nextLong();
+	«rVar.name» = int(input())
 «ELSEIF type.toString() == "double"-» 
-«type» «rVar.name» = reader.nextDouble();
+	«rVar.name» = getdouble(input())
+«ELSEIF type.toString() == "float"-» 
+	«rVar.name» = float(input())
 «ELSEIF type.toString() == "string"-» 
-String «rVar.name» = reader.nextLine();
+	«rVar.name» = str(input())
 «ELSEIF type.toString() == "boolean"-» 
-«type» «rVar.name» = reader.nextBoolean();
+	«rVar.name» = ast.literal_eval(input())
 «ENDIF-»
 «ENDDEFINE»
 
 «DEFINE statement FOR Write-»
-System.out.println(«wVar.name»);
+	print(«wVar.name»)
 «ENDDEFINE»
 
 «DEFINE statement FOR ProcedureCall»
-«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»);
+«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»)
 «ENDDEFINE»
 
 «DEFINE statement FOR ProcedureReturn-»
-return «EXPAND operand FOR Expression-»;
+	return «EXPAND operand FOR Expression-»
 «ENDDEFINE»
 
 «DEFINE statement FOR If»
-if(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statement-»
-}
-«IF !Alternative.Statement.isEmpty»else{«EXPAND statement FOREACH Alternative.Statement-»«ENDIF-»
-}
+	if «EXPAND statement FOR Condition-»:
+		«EXPAND statement FOREACH Body.Statement-»
+
+	«IF !Alternative.Statement.isEmpty-»
+	else:
+		«EXPAND statement FOREACH Alternative.Statement-»«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE statement FOR While»
-while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statement-»
-}
+	while «EXPAND statement FOR Condition-»:
+		«EXPAND statement FOREACH Body.Statement-»
 «ENDDEFINE»
 
 «DEFINE operand FOR Expression-»
@@ -76,11 +83,15 @@ while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statemen
 «this.name-»
 «ENDDEFINE-»
 
+«DEFINE operandVA FOR Variable-»
+	«this.name-»
+«ENDDEFINE-»
+
 «DEFINE operand FOR Constant-»
-«IF asInteger.length != 0» «asInteger-»
-«ELSEIF asReal.length != 0» «asReal.asInteger()-»
-«ELSEIF asString.length != 0» «asString-»
-«ELSE» «asBoolean.toString()-»
+«IF asInteger.length != 0»«asInteger-»
+«ELSEIF asReal.length != 0»«asReal»
+«ELSEIF asString.length != 0»«asString-»
+«ELSEIF asInteger.length == 0 && asReal.length == 0 && asString.length==0»«asBoolean.toString()-»
 «ENDIF-»
 «ENDDEFINE-»
 
@@ -97,7 +108,7 @@ while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statemen
 «ENDDEFINE-»
 
 «DEFINE operand FOR ProcedureCall»
-«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»)
+	«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»)
 «ENDDEFINE»
 
 «DEFINE operand FOR UnaryExpression-»

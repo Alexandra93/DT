@@ -26,7 +26,7 @@
 		<expand
 			value="template::Template::main FOR model" />
 		<outlet path="${srcGenPath}" >
-			<postprocessor class="beautifier.Beautifier"/>
+			<postprocessor class="org.eclipse.xpand2.output.JavaBeautifier"/>
 		</outlet>
 		<resourceManager class ="org.eclipse.xtend.expression.ResourceManagerDefaultImpl">
 			<fileEncoding value="ISO-8859-1"/>

@@ -1,5 +1,4 @@
 «IMPORT workflow»
-«IMPORT dt::workflow::generator::template»
 
 «EXTENSION template::GeneratorExtensions»
 
@@ -30,18 +29,27 @@ using System.Threading.Tasks;
 namespace «name»{
 
 	class «name»{
-		«EXPAND TemplateCS::ProcDeclCS FOREACH declarations»
+		«EXPAND TemplateCS::ProcDeclCS FOREACH declarations-»
 	}
 }
 «ENDFILE-»
 «ELSEIF language.toString()=="Python"-»
 «FILE name + ".py"-»
 # Generated at «timestamp()»
+
+from tkinter import getdouble
+import ast
+
 «EXPAND TemplatePython::ProcDeclPython FOREACH declarations»
 «ENDFILE-»
 «ELSEIF language.toString()=="CPP"-»
 «FILE name + ".cpp"-»
 /* Generated at «timestamp()» */
+
+#include<iostream>
+#include<string>
+
+using namespace std;
 «EXPAND TemplateCPP::ProcDeclCPP FOREACH declarations»
 «ENDFILE-»
 «ENDIF»

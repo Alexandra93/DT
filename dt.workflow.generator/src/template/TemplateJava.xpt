@@ -3,8 +3,8 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE ProcDeclJava FOR ProcedureDeclaration»
-«IF accessModifier.toString()!="default"»«accessModifier»«ENDIF» «returnType» «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR iter» «param.type» «param.name» «IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»«ENDIF»){
-«IF !Variables.isEmpty» «FOREACH Variables AS var ITERATOR iter» «IF var.isConstant» final «ENDIF» «var.type» «var.name»;«ENDFOREACH»«ENDIF»
+«IF accessModifier.toString()!="default"»«accessModifier»«ENDIF» «returnType» «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR iter» «typesInJava(param.type)» «param.name» «IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»«ENDIF»){
+«IF !Variables.isEmpty» «FOREACH Variables AS var ITERATOR iter» «IF var.isConstant» final «ENDIF» «typesInJava(var.type)» «var.name»;«ENDFOREACH»«ENDIF»
 «IF Block.name.length!=0 && !Body.Statement.isEmpty» «IF !Body.Statement.select(e | e.metaType.name.toString() == "workflow::Read").isEmpty» Scanner reader = new Scanner(System.in); «ENDIF» «EXPAND statement FOREACH Body.Statement» } «ELSE» } «ENDIF»
 «ENDDEFINE»
 
@@ -62,8 +62,7 @@ return «EXPAND operand FOR Expression-»;
 «DEFINE statement FOR If»
 if(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statement-»
 }
-«IF !Alternative.Statement.isEmpty»else{«EXPAND statement FOREACH Alternative.Statement-»«ENDIF-»
-}
+«IF !Alternative.Statement.isEmpty»else{«EXPAND statement FOREACH Alternative.Statement-» }«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE statement FOR While»
@@ -76,14 +75,6 @@ while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statemen
 
 «DEFINE operand FOR Variable-»
 «this.name-»
-«ENDDEFINE-»
-
-«DEFINE operand FOR Constant-»
-«IF asInteger.length != 0» «asInteger-»
-«ELSEIF asReal.length != 0» «asReal.asInteger()-»
-«ELSEIF asString.length != 0» «asString-»
-«ELSE» «asBoolean.toString()-»
-«ENDIF-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR EqualityExpression-»
@@ -104,4 +95,12 @@ while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statemen
 
 «DEFINE operand FOR UnaryExpression-»
 «unaryOperator()-»«EXPAND operand FOR this.Operand-»
+«ENDDEFINE-»
+
+«DEFINE operand FOR Constant-»
+«IF asInteger.length != 0» «asInteger-»
+«ELSEIF asReal.length != 0» «asReal-»
+«ELSEIF asString.length != 0» "«asString-»"
+«ELSEIF asInteger.length == 0 && asReal.length == 0 && asString.length==0» «asBoolean.toString()-»
+«ENDIF-»
 «ENDDEFINE-»

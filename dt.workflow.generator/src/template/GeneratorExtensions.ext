@@ -38,3 +38,43 @@ String unaryOperator( workflow::UnaryExpression unaryOperator ):
 
 String timestamp():
 	JAVA utils.TemplateUtils.timestamp();
+
+String typesInJava( workflow::Type type):
+switch 
+	{ 
+		case type.toString() == "string" : 'String'
+	    default : type.toString()
+	};
+
+String typesInCS( workflow::Type type):
+switch 
+	{ 
+		case type.toString() == "boolean" : 'Boolean'
+	    default : type.toString()
+	};
+	
+String typesInCPP( workflow::Type type):
+switch 
+	{ 
+		case type.toString() == "boolean" : 'bool'
+	    default : type.toString()
+	};
+	
+String typesInPython( workflow::Type type):
+switch 
+	{ 
+		case type.toString() == "string" : 'str'
+	    default : type.toString()
+	};
+	
+String defaultValue( workflow::Type type):
+switch 
+	{ 
+		case type.toString() == "int" : '0'
+		case type.toString() == "long" : '0'
+		case type.toString() == "double" : '0'
+		case type.toString() == "float" : '0'
+		case type.toString() == "string" : '""'
+		case type.toString() == "boolean" : 'true'
+		default : 'not defined'
+	};
