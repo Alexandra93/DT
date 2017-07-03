@@ -1,0 +1,114 @@
+«IMPORT design»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE ClassDesignCS FOR Design»
+«FOREACH this.elements AS element»
+«FILE element.name.toFirstUpper() + ".cs"-»
+/* Generated at «timestamp()» */
+«LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Generalization") AS generalizations-» 
+«LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Realization") AS realizations-»
+«LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Dependency") AS dependencies-»
+«LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Aggregation") AS aggregations-»
+«LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Composition") AS compositions-»
+«LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Association") AS associations-»
+
+«element.accessModifier» «element.classifier()» «element.name.toFirstUpper()-» «IF !generalizations.isEmpty || !realizations.isEmpty-»:«IF !generalizations.isEmpty-»«FOREACH generalizations AS generalization ITERATOR iter-» «generalization.target.name.toFirstUpper()-»«IF !iter.lastIteration»,«ENDIF-»«ENDFOREACH-»«ENDIF-»
+«IF !generalizations.isEmpty && !realizations.isEmpty-»,«ENDIF-»
+«IF !realizations.isEmpty-»
+«FOREACH realizations AS realization ITERATOR iter-» «realization.target.name.toFirstUpper()-»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH-»
+«ENDIF-»
+«ENDIF-»
+{
+«EXPAND Attributes FOREACH element.attributes»
+«IF element.metaType.toString()=="design::Class"-»
+	public «element.name.toFirstUpper()»() {
+	
+	}
+«ENDIF-»
+«IF !compositions.isEmpty-»
+«FOREACH compositions AS composition-»
+	private «composition.target.name.toFirstUpper()» _«composition.target.name.toFirstLower()» = new «composition.target.name.toUpperCase()-»();
+«ENDFOREACH-»
+«ENDIF-»
+«IF !associations.isEmpty-»
+«FOREACH associations AS association-»
+	private «association.target.name.toFirstUpper()» _«association.target.name.toFirstLower()-»;
+«ENDFOREACH-»
+«ENDIF-»
+«IF !aggregations.isEmpty-»
+«FOREACH aggregations AS aggregation-»
+	private «aggregation.target.name.toFirstUpper()» _«aggregation.target.name.toFirstLower()-»;
+«ENDFOREACH-»
+«FOREACH aggregations AS aggregation-»
+	public void set«aggregation.target.name.toFirstUpper()»(«aggregation.target.name.toFirstUpper()» «aggregation.target.name.toFirstLower()-»){
+		_«aggregation.target.name.toFirstLower()» = «aggregation.target.name.toFirstLower()-»;
+	}
+«ENDFOREACH-»
+«ENDIF-»
+«IF !associations.isEmpty-»
+«FOREACH associations AS association-»
+	public «association.target.name.toFirstUpper()» get«association.target.name.toFirstUpper()-»(){
+		return _«association.target.name.toFirstLower()-»;
+	}
+«ENDFOREACH-»
+«ENDIF-»
+«IF !dependencies.isEmpty-»
+«FOREACH dependencies AS dependency-»
+	public void method«dependency.target.name.toFirstUpper()» («dependency.target.name.toFirstUpper()» «dependency.target.name.toFirstLower()-»){
+	}
+«ENDFOREACH-»
+«ENDIF-»
+«EXPAND Methods FOREACH element.attributes-»
+«IF !realizations.isEmpty-»
+«FOREACH realizations AS realization-»
+«EXPAND MethodsOverriden FOREACH realization.target.attributes-»
+«ENDFOREACH-»
+«ENDIF-»
+}
+«ENDLET-»
+«ENDLET-»
+«ENDLET-»
+«ENDLET-»
+«ENDLET-»
+«ENDLET-»
+«ENDFILE-»
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE Attributes FOR Attribute»
+«IF this.eContainer.metaType.toString()=="design::Class"-»
+    private «typesInCS(this.type)» «this.name»;
+«ELSE-»
+	//Interfaces cannot contain fields
+«ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE Methods FOR Attribute»
+«IF this.eContainer.metaType.toString()=="design::Class"-»
+    public void «setter()»(«typesInCS(this.type)» «this.name») {
+        this.«name» = «name»;
+    }
+
+    public «typesInCS(this.type)» «getter()»() {
+        return «name»;
+    }
+
+«ELSEIF this.eContainer.metaType.toString()=="design::Interface"-»
+ 	void «setter()»(«typesInCS(this.type)» «this.name»);
+ 	
+    «typesInCS(this.type)» «getter()»();
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE MethodsOverriden FOR Attribute»
+	public void «setter()»(«typesInCS(this.type)» «this.name»){
+	
+	}
+
+    public «typesInCS(this.type)» «getter()»(){
+    	return «this.type.defaultValue()»;
+    }
+«ENDDEFINE»
+
+

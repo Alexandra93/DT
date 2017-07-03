@@ -28,3 +28,19 @@ switch
 		case type.toString()=="boolean": 'false'
 	    default : 'not defined'
 	};
+
+String typesInCS(Type type):
+switch 
+	{ 
+		case type.toString() == "boolean" : 'Boolean'
+		case type.toString() == "String" : 'string'
+	    default : type.toString()
+	};
+	
+String typesInCPP(Type type):
+switch 
+	{ 
+		case type.toString() == "boolean" : 'bool'
+		case type.toString() == "String" : 'string'
+	    default : type.toString()
+	};
