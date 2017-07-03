@@ -16,7 +16,7 @@ import design.Interface;
 import design.Languages;
 import design.Operation;
 import design.Realization;
-import design.Type;
+import design.Types;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -97,8 +97,8 @@ public class DesignFactoryImpl extends EFactoryImpl implements DesignFactory {
 		switch (eDataType.getClassifierID()) {
 			case DesignPackage.LANGUAGES:
 				return createLanguagesFromString(eDataType, initialValue);
-			case DesignPackage.TYPE:
-				return createTypeFromString(eDataType, initialValue);
+			case DesignPackage.TYPES:
+				return createTypesFromString(eDataType, initialValue);
 			case DesignPackage.ACCESS_MODIFIERS:
 				return createAccessModifiersFromString(eDataType, initialValue);
 			default:
@@ -116,8 +116,8 @@ public class DesignFactoryImpl extends EFactoryImpl implements DesignFactory {
 		switch (eDataType.getClassifierID()) {
 			case DesignPackage.LANGUAGES:
 				return convertLanguagesToString(eDataType, instanceValue);
-			case DesignPackage.TYPE:
-				return convertTypeToString(eDataType, instanceValue);
+			case DesignPackage.TYPES:
+				return convertTypesToString(eDataType, instanceValue);
 			case DesignPackage.ACCESS_MODIFIERS:
 				return convertAccessModifiersToString(eDataType, instanceValue);
 			default:
@@ -260,8 +260,8 @@ public class DesignFactoryImpl extends EFactoryImpl implements DesignFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type createTypeFromString(EDataType eDataType, String initialValue) {
-		Type result = Type.get(initialValue);
+	public Types createTypesFromString(EDataType eDataType, String initialValue) {
+		Types result = Types.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -271,7 +271,7 @@ public class DesignFactoryImpl extends EFactoryImpl implements DesignFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertTypesToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

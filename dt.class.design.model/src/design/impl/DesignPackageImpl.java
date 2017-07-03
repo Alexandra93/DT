@@ -18,7 +18,7 @@ import design.Languages;
 import design.Operation;
 import design.Realization;
 import design.Relation;
-import design.Type;
+import design.Types;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -138,7 +138,7 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum typeEEnum = null;
+	private EEnum typesEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -260,6 +260,15 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 	 */
 	public EAttribute getOperation_Name() {
 		return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_ReturnType() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -447,8 +456,8 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getType() {
-		return typeEEnum;
+	public EEnum getTypes() {
+		return typesEEnum;
 	}
 
 	/**
@@ -496,6 +505,7 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 
 		operationEClass = createEClass(OPERATION);
 		createEAttribute(operationEClass, OPERATION__NAME);
+		createEAttribute(operationEClass, OPERATION__RETURN_TYPE);
 
 		designEClass = createEClass(DESIGN);
 		createEReference(designEClass, DESIGN__ELEMENTS);
@@ -528,7 +538,7 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 
 		// Create enums
 		languagesEEnum = createEEnum(LANGUAGES);
-		typeEEnum = createEEnum(TYPE);
+		typesEEnum = createEEnum(TYPES);
 		accessModifiersEEnum = createEEnum(ACCESS_MODIFIERS);
 	}
 
@@ -574,10 +584,11 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_Type(), this.getType(), "type", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Type(), this.getTypes(), "type", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_ReturnType(), this.getTypes(), "returnType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(designEClass, Design.class, "Design", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDesign_Elements(), this.getClassifier(), null, "elements", null, 0, -1, Design.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -615,14 +626,14 @@ public class DesignPackageImpl extends EPackageImpl implements DesignPackage {
 		addEEnumLiteral(languagesEEnum, Languages.PYTHON);
 		addEEnumLiteral(languagesEEnum, Languages.CPP);
 
-		initEEnum(typeEEnum, Type.class, "Type");
-		addEEnumLiteral(typeEEnum, Type.INT);
-		addEEnumLiteral(typeEEnum, Type.LONG);
-		addEEnumLiteral(typeEEnum, Type.DOUBLE);
-		addEEnumLiteral(typeEEnum, Type.FLOAT);
-		addEEnumLiteral(typeEEnum, Type.STRING);
-		addEEnumLiteral(typeEEnum, Type.BOOLEAN);
-		addEEnumLiteral(typeEEnum, Type.VOID);
+		initEEnum(typesEEnum, Types.class, "Types");
+		addEEnumLiteral(typesEEnum, Types.INT);
+		addEEnumLiteral(typesEEnum, Types.LONG);
+		addEEnumLiteral(typesEEnum, Types.DOUBLE);
+		addEEnumLiteral(typesEEnum, Types.FLOAT);
+		addEEnumLiteral(typesEEnum, Types.STRING);
+		addEEnumLiteral(typesEEnum, Types.BOOLEAN);
+		addEEnumLiteral(typesEEnum, Types.VOID);
 
 		initEEnum(accessModifiersEEnum, AccessModifiers.class, "AccessModifiers");
 		addEEnumLiteral(accessModifiersEEnum, AccessModifiers.PUBLIC);

@@ -50,7 +50,7 @@ public interface Attribute extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link design.Type}.
+	 * The literals are from the enumeration {@link design.Types}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
@@ -58,23 +58,23 @@ public interface Attribute extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see design.Type
-	 * @see #setType(Type)
+	 * @see design.Types
+	 * @see #setType(Types)
 	 * @see design.DesignPackage#getAttribute_Type()
 	 * @model
 	 * @generated
 	 */
-	Type getType();
+	Types getType();
 
 	/**
 	 * Sets the value of the '{@link design.Attribute#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see design.Type
+	 * @see design.Types
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setType(Types value);
 
 } // Attribute

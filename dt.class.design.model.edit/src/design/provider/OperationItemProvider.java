@@ -61,6 +61,7 @@ public class OperationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addReturnTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -79,6 +80,28 @@ public class OperationItemProvider
 				 getString("_UI_Operation_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_name_feature", "_UI_Operation_type"),
 				 DesignPackage.Literals.OPERATION__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Return Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReturnTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Operation_returnType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_returnType_feature", "_UI_Operation_type"),
+				 DesignPackage.Literals.OPERATION__RETURN_TYPE,
 				 true,
 				 false,
 				 false,
@@ -126,6 +149,7 @@ public class OperationItemProvider
 
 		switch (notification.getFeatureID(Operation.class)) {
 			case DesignPackage.OPERATION__NAME:
+			case DesignPackage.OPERATION__RETURN_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

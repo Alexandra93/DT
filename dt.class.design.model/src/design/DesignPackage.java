@@ -251,13 +251,22 @@ public interface DesignPackage extends EPackage {
 	int OPERATION__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__RETURN_TYPE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = 1;
+	int OPERATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Operation</em>' class.
@@ -720,14 +729,14 @@ public interface DesignPackage extends EPackage {
 	int LANGUAGES = 13;
 
 	/**
-	 * The meta object id for the '{@link design.Type <em>Type</em>}' enum.
+	 * The meta object id for the '{@link design.Types <em>Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see design.Type
-	 * @see design.impl.DesignPackageImpl#getType()
+	 * @see design.Types
+	 * @see design.impl.DesignPackageImpl#getTypes()
 	 * @generated
 	 */
-	int TYPE = 14;
+	int TYPES = 14;
 
 	/**
 	 * The meta object id for the '{@link design.AccessModifiers <em>Access Modifiers</em>}' enum.
@@ -802,6 +811,17 @@ public interface DesignPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOperation_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link design.Operation#getReturnType <em>Return Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Return Type</em>'.
+	 * @see design.Operation#getReturnType()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_ReturnType();
 
 	/**
 	 * Returns the meta object for class '{@link design.Design <em>Design</em>}'.
@@ -1013,14 +1033,14 @@ public interface DesignPackage extends EPackage {
 	EEnum getLanguages();
 
 	/**
-	 * Returns the meta object for enum '{@link design.Type <em>Type</em>}'.
+	 * Returns the meta object for enum '{@link design.Types <em>Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Type</em>'.
-	 * @see design.Type
+	 * @return the meta object for enum '<em>Types</em>'.
+	 * @see design.Types
 	 * @generated
 	 */
-	EEnum getType();
+	EEnum getTypes();
 
 	/**
 	 * Returns the meta object for enum '{@link design.AccessModifiers <em>Access Modifiers</em>}'.
@@ -1108,6 +1128,14 @@ public interface DesignPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OPERATION__NAME = eINSTANCE.getOperation_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__RETURN_TYPE = eINSTANCE.getOperation_ReturnType();
 
 		/**
 		 * The meta object literal for the '{@link design.impl.DesignImpl <em>Design</em>}' class.
@@ -1292,14 +1320,14 @@ public interface DesignPackage extends EPackage {
 		EEnum LANGUAGES = eINSTANCE.getLanguages();
 
 		/**
-		 * The meta object literal for the '{@link design.Type <em>Type</em>}' enum.
+		 * The meta object literal for the '{@link design.Types <em>Types</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see design.Type
-		 * @see design.impl.DesignPackageImpl#getType()
+		 * @see design.Types
+		 * @see design.impl.DesignPackageImpl#getTypes()
 		 * @generated
 		 */
-		EEnum TYPE = eINSTANCE.getType();
+		EEnum TYPES = eINSTANCE.getTypes();
 
 		/**
 		 * The meta object literal for the '{@link design.AccessModifiers <em>Access Modifiers</em>}' enum.

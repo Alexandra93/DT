@@ -4,7 +4,7 @@ package design.impl;
 
 import design.Attribute;
 import design.DesignPackage;
-import design.Type;
+import design.Types;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -56,7 +56,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Type TYPE_EDEFAULT = Type.INT;
+	protected static final Types TYPE_EDEFAULT = Types.INT;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -66,7 +66,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type = TYPE_EDEFAULT;
+	protected Types type = TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,7 +113,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getType() {
+	public Types getType() {
 		return type;
 	}
 
@@ -122,8 +122,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(Type newType) {
-		Type oldType = type;
+	public void setType(Types newType) {
+		Types oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DesignPackage.ATTRIBUTE__TYPE, oldType, type));
@@ -157,7 +157,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 				setName((String)newValue);
 				return;
 			case DesignPackage.ATTRIBUTE__TYPE:
-				setType((Type)newValue);
+				setType((Types)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

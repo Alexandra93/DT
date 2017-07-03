@@ -10,14 +10,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Type</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Types</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see design.DesignPackage#getType()
+ * @see design.DesignPackage#getTypes()
  * @model
  * @generated
  */
-public enum Type implements Enumerator {
+public enum Types implements Enumerator {
 	/**
 	 * The '<em><b>Int</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -194,13 +194,13 @@ public enum Type implements Enumerator {
 	public static final int VOID_VALUE = 6;
 
 	/**
-	 * An array of all the '<em><b>Type</b></em>' enumerators.
+	 * An array of all the '<em><b>Types</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final Type[] VALUES_ARRAY =
-		new Type[] {
+	private static final Types[] VALUES_ARRAY =
+		new Types[] {
 			INT,
 			LONG,
 			DOUBLE,
@@ -211,24 +211,24 @@ public enum Type implements Enumerator {
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Type</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Types</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<Type> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<Types> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Type</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Types</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Type get(String literal) {
+	public static Types get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Type result = VALUES_ARRAY[i];
+			Types result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -237,16 +237,16 @@ public enum Type implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Type</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Types</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param name the name.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Type getByName(String name) {
+	public static Types getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Type result = VALUES_ARRAY[i];
+			Types result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -255,14 +255,14 @@ public enum Type implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Type</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Types</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Type get(int value) {
+	public static Types get(int value) {
 		switch (value) {
 			case INT_VALUE: return INT;
 			case LONG_VALUE: return LONG;
@@ -302,7 +302,7 @@ public enum Type implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Type(int value, String name, String literal) {
+	private Types(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -346,4 +346,4 @@ public enum Type implements Enumerator {
 		return literal;
 	}
 	
-} //Type
+} //Types
