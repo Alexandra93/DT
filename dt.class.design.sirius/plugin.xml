@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
   <extension point="org.eclipse.sirius.componentization">
-    <component class="defaultpackage.Activator"
+    <component class="services.Activator"
                id="dt.class.design.sirius"
 	       name="design">
     </component>

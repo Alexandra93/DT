@@ -92,7 +92,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="design.Class" referenceName="elements">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="feature:name"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service:computeDefaultName()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -103,7 +103,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="design.Interface" referenceName="elements">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="feature:name"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service:computeDefaultName()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -116,7 +116,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="design.Attribute" referenceName="attributes">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="feature:name"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service:computeDefaultName()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -127,7 +127,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="design.Operation" referenceName="operations">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="feature:name"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="service:computeDefaultName()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -221,6 +221,7 @@
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="services.Services"/>
   </ownedViewpoints>
   <userColorsPalettes name="Class Design Colors">
     <entries xsi:type="description:UserFixedColor" red="232" green="239" blue="247" name="Class_Color"/>
