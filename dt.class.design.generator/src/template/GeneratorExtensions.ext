@@ -17,7 +17,7 @@ switch
 	    default : 'not defined'
 	};
 	
-String defaultValue(Type type):
+String defaultValue(Types type):
 switch 
 	{ 
 		case type.toString()=="int": '0'
@@ -26,10 +26,11 @@ switch
 		case type.toString()=="float": '0'
 		case type.toString()=="String": '" "'
 		case type.toString()=="boolean": 'false'
+		case type.toString()=="void" : 'void'
 	    default : 'not defined'
 	};
 
-String typesInCS(Type type):
+String typesInCS(Types type):
 switch 
 	{ 
 		case type.toString() == "boolean" : 'Boolean'
@@ -37,7 +38,7 @@ switch
 	    default : type.toString()
 	};
 	
-String typesInCPP(Type type):
+String typesInCPP(Types type):
 switch 
 	{ 
 		case type.toString() == "boolean" : 'bool'

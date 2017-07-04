@@ -62,6 +62,7 @@ class «element.name.toFirstUpper()-» «IF !generalizations.isEmpty || !realizatio
 «ENDIF-»
 
 «EXPAND Methods FOREACH element.attributes-»
+«EXPAND Operations FOREACH element.operations-»
 
 «IF !associations.isEmpty-»
 «FOREACH associations AS association-»
@@ -78,6 +79,7 @@ class «element.name.toFirstUpper()-» «IF !generalizations.isEmpty || !realizatio
 «IF !realizations.isEmpty-»
 «FOREACH realizations AS realization-»
 «EXPAND MethodsOverriden FOREACH realization.target.attributes-»
+«EXPAND MethodsOverriden FOREACH realization.target.operations-»
 «ENDFOREACH-»
 «ENDIF-»
 «ENDLET-»
@@ -95,6 +97,11 @@ class «element.name.toFirstUpper()-» «IF !generalizations.isEmpty || !realizatio
 «ELSE-»
 	«this.name» = «this.type.defaultValue()-»
 «ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE Operations FOR Operation»
+    def «this.name»(self):
+    	raise NotImplementedError('Not implemented yet')
 «ENDDEFINE-»
 «DEFINE Methods FOR Attribute»
 «IF this.eContainer.metaType.toString()=="design::Class"-»
@@ -120,4 +127,7 @@ class «element.name.toFirstUpper()-» «IF !generalizations.isEmpty || !realizatio
     	 raise NotImplementedError('The method comes from base class and should be defined.')
 «ENDDEFINE-»
 
-
+«DEFINE MethodsOverriden FOR Operation»
+	def «this.name»(self):
+		raise NotImplementedError('Not implemented yet')
+«ENDDEFINE»

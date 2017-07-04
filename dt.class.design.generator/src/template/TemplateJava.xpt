@@ -27,6 +27,7 @@
 	
 	}
 «ENDIF-»
+«EXPAND Operations FOREACH element.operations»
 
 «IF !compositions.isEmpty-»
 «FOREACH compositions AS composition-»
@@ -70,6 +71,7 @@
 «IF !realizations.isEmpty-»
 «FOREACH realizations AS realization-»
 «EXPAND MethodsOverriden FOREACH realization.target.attributes»
+«EXPAND MethodsOverriden FOREACH realization.target.operations»
 «ENDFOREACH»
 «ENDIF»
 }
@@ -88,6 +90,18 @@
     private «this.type» «this.name»;
 «ELSE-»
 	public «this.type» «this.name» = «this.type.defaultValue()-»;
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE Operations FOR Operation»
+«IF this.eContainer.metaType.toString()=="design::Class"-»
+    private «this.returnType» «this.name»(){
+«IF this.returnType.defaultValue()!="void"-»
+		return «this.returnType.defaultValue()»;
+«ENDIF-»
+	}
+«ELSE-»
+	public «this.returnType» «this.name»();
 «ENDIF-»
 «ENDDEFINE»
 
@@ -120,4 +134,12 @@
     }
 «ENDDEFINE»
 
+«DEFINE MethodsOverriden FOR Operation»
+	@Override
+	public «this.returnType» «this.name»(){
+«IF this.returnType.defaultValue()!="void"-»
+		return «this.returnType.defaultValue()»;
+«ENDIF-»
+	}
+«ENDDEFINE»
 

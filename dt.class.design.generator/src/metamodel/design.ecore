@@ -4,10 +4,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//Classifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Types"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnType" eType="#//Types"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Design">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
@@ -32,7 +33,7 @@
     <eLiterals name="Python" value="2" literal="Python"/>
     <eLiterals name="CPP" value="3" literal="CPP"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Type">
+  <eClassifiers xsi:type="ecore:EEnum" name="Types">
     <eLiterals name="int"/>
     <eLiterals name="long" value="1" literal="long"/>
     <eLiterals name="double" value="2"/>

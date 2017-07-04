@@ -89,6 +89,7 @@ public:
 	}
 «ENDFOREACH-»
 «ENDIF-»
+«EXPAND Operations FOREACH element.operations-»
 «EXPAND Methods FOREACH element.attributes-»
 «IF !realizations.isEmpty-»
 «FOREACH realizations AS realization-»
@@ -113,6 +114,17 @@ public:
 	«typesInCPP(this.type)» «this.name» = «this.type.defaultValue()-»;
 «ENDIF-»
 «ENDDEFINE-»
+
+«DEFINE Operations FOR Operation»
+«IF this.eContainer.metaType.toString()=="design::Class"-»
+    «typesInCPP(this.returnType)» «this.name»() {
+    
+    }
+«ELSEIF this.eContainer.metaType.toString()=="design::Interface"-»
+    virtual «typesInCPP(this.returnType)» «this.name»() = 0;
+«ENDIF-»
+«ENDDEFINE»
+
 
 «DEFINE Methods FOR Attribute»
 «IF this.eContainer.metaType.toString()=="design::Class"-»

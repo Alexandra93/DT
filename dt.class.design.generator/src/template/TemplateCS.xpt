@@ -6,6 +6,8 @@
 «FOREACH this.elements AS element»
 «FILE element.name.toFirstUpper() + ".cs"-»
 /* Generated at «timestamp()» */
+
+using System;
 «LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Generalization") AS generalizations-» 
 «LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Realization") AS realizations-»
 «LET this.relations.select(e|e.source.name == element.name && e.metaType.toString()=="design::Dependency") AS dependencies-»
@@ -26,6 +28,8 @@
 	
 	}
 «ENDIF-»
+«EXPAND Operations FOREACH element.operations»
+
 «IF !compositions.isEmpty-»
 «FOREACH compositions AS composition-»
 	private «composition.target.name.toFirstUpper()» _«composition.target.name.toFirstLower()» = new «composition.target.name.toUpperCase()-»();
@@ -63,6 +67,7 @@
 «IF !realizations.isEmpty-»
 «FOREACH realizations AS realization-»
 «EXPAND MethodsOverriden FOREACH realization.target.attributes-»
+«EXPAND MethodsOverriden FOREACH realization.target.operations-»
 «ENDFOREACH-»
 «ENDIF-»
 }
@@ -83,6 +88,16 @@
 	//Interfaces cannot contain fields
 «ENDIF-»
 «ENDDEFINE-»
+
+«DEFINE Operations FOR Operation»
+«IF this.eContainer.metaType.toString()=="design::Class"-»
+	private «typesInCS(this.returnType)» «this.name»(){
+		throw new NotImplementedException();
+	}
+«ELSEIF this.eContainer.metaType.toString()=="design::Interface"-»
+	«typesInCS(this.returnType)» «this.name»();
+«ENDIF-»
+«ENDDEFINE»
 
 «DEFINE Methods FOR Attribute»
 «IF this.eContainer.metaType.toString()=="design::Class"-»
@@ -110,5 +125,12 @@
     	return «this.type.defaultValue()»;
     }
 «ENDDEFINE»
+
+«DEFINE MethodsOverriden FOR Operation»
+	public «this.returnType» «this.name»(){
+		throw new NotImplementedException();
+	}
+«ENDDEFINE»
+
 
 
