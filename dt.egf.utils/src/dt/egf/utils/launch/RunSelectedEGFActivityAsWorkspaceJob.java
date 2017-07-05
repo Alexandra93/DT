@@ -12,6 +12,6 @@ public class RunSelectedEGFActivityAsWorkspaceJob extends RunSelectedEGFActivity
 	
 	@Override
 	protected String getDialogTitle(ISelection selection) {
-		return "Altran - Run EGF Activity as WorkspaceJob";
+		return "Run EGF Activity as WorkspaceJob";
 	}
 }

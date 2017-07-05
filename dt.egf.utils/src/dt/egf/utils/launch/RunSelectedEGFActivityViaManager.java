@@ -12,7 +12,7 @@ public class RunSelectedEGFActivityViaManager extends RunSelectedEGFActivity {
 	
 	@Override
 	protected String getDialogTitle(ISelection selection) {
-		return "Altran - Run EGF Activity via Manager";
+		return "Run EGF Activity via Manager";
 	}
 	
 }

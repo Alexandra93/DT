@@ -38,7 +38,7 @@ public class RunSelectedEGFActivity extends
 	
 	@Override
 	protected String getDialogTitle(ISelection selection) {
-		return "Altran - Run EGF Activity...";
+		return "Run EGF Activity...";
 	}
 	
 	@Override

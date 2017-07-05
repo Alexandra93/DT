@@ -11,19 +11,6 @@ import org.eclipse.egf.ftask.producer.invocation.ITaskProduction;
 import org.eclipse.egf.model.fcore.Contract;
 import org.eclipse.emf.common.util.URI;
 
-/**
- * 
- * @author marc.hamilton
- * 
- * Reconstruction and parsing of uri is based on the {@link KeysURI} class.
- * See {@link KeysURI} for which keys are recognized in URI construction.
- * 
- * Other possible keys:
- * forceScheme : Boolean : true implies to apply scheme when uri doesn't provide one
- * 
- * The reconstruction is delegated to the {@link URIConstructor} class.
- * 
- */
 public class ReconstructUri implements ITaskProduction {
 
 //	EGFAbstractPlugin logger = EGFCorePlugin.getDefault();
