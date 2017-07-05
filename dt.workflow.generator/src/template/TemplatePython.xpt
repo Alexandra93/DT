@@ -5,13 +5,16 @@
 «DEFINE ProcDeclPython FOR ProcedureDeclaration»
 def «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR iter» «param.name»: «typesInPython(param.type)»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»«ENDIF»):
 «IF !Variables.isEmpty» «FOREACH Variables AS var ITERATOR iter» 
-«var.name» : «var.type» 
+	«var.name» : «typesInPython(var.type)» 
 «ENDFOREACH-»
 «ENDIF-»
-«IF Block.name.length!=0 && !Body.Statement.isEmpty» «EXPAND statement FOREACH Body.Statement» «ENDIF»
-«ENDDEFINE»
+«IF Block.name.length!=0 && !Body.Statement.isEmpty-» 
+	«EXPAND statement FOREACH Body.Statement» 
+«ENDIF-»
+«ENDDEFINE-»
 
 «DEFINE statement FOR Statement»
+
 «ENDDEFINE»
 
 «DEFINE statement FOR EqualityExpression-»
@@ -19,7 +22,7 @@ def «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR it
 «ENDDEFINE-»
 
 «DEFINE statement FOR ArithmeticExpression-»
-«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-» 
+«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-»«EXPAND operand FOR this.Operand2-» 
 «ENDDEFINE-»
 
 «DEFINE statement FOR LogicExpression-»
@@ -31,7 +34,7 @@ def «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR it
 «ENDDEFINE-»
 
 «DEFINE statement FOR VariableAssignment-»
-	«EXPAND operandVA FOR LValue-» = «EXPAND operand FOR RValue-»
+     «EXPAND operandVA FOR LValue-» = «EXPAND operand FOR RValue»
 «ENDDEFINE-»
 
 «DEFINE statement FOR Read-»
@@ -65,15 +68,15 @@ def «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR it
 «DEFINE statement FOR If»
 	if «EXPAND statement FOR Condition-»:
 		«EXPAND statement FOREACH Body.Statement-»
-
 	«IF !Alternative.Statement.isEmpty-»
 	else:
-		«EXPAND statement FOREACH Alternative.Statement-»«ENDIF-»
+		«EXPAND statement FOREACH Alternative.Statement-»
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE statement FOR While»
 	while «EXPAND statement FOR Condition-»:
-		«EXPAND statement FOREACH Body.Statement-»
+         «EXPAND statement FOREACH Body.Statement»
 «ENDDEFINE»
 
 «DEFINE operand FOR Expression-»
@@ -88,28 +91,28 @@ def «this.name» («IF !Parameter.isEmpty» «FOREACH Parameter AS param ITERATOR it
 «ENDDEFINE-»
 
 «DEFINE operand FOR Constant-»
-«IF asInteger.length != 0»«asInteger-»
-«ELSEIF asReal.length != 0»«asReal»
-«ELSEIF asString.length != 0»«asString-»
-«ELSEIF asInteger.length == 0 && asReal.length == 0 && asString.length==0»«asBoolean.toString()-»
+«IF asInteger.length.toString() != "null"»«asInteger.toString()-»
+«ELSEIF asReal.length.toString() != "null"»«asReal.toString()-»
+«ELSEIF asString.length.toString() != "null"»«valueString()-»
+«ELSEIF asInteger.length.toString() == "null" && asReal.length.toString() == "null" && asString.length.toString() == "null"»«asBoolean.toString().toFirstUpper()-»
 «ENDIF-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR EqualityExpression-»
-(«EXPAND operand FOR this.Operand1-» «comparisonOperator()-» «EXPAND operand FOR this.Operand2-») 
+«EXPAND operand FOR this.Operand1-» «comparisonOperator()-» «EXPAND operand FOR this.Operand2-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR ArithmeticExpression-»
-(«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-»)
+«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR LogicExpression-»
-(«EXPAND operand FOR this.Operand1-» «logicalOperator()-» «EXPAND operand FOR this.Operand2-»)
+«EXPAND operand FOR this.Operand1-» «logicalOperator()-» «EXPAND operand FOR this.Operand2-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR ProcedureCall»
 	«name»(«FOREACH Argument AS arg ITERATOR iter»«EXPAND operand FOR arg»«IF !iter.lastIteration»,«ENDIF»«ENDFOREACH»)
-«ENDDEFINE»
+«ENDDEFINE-»
 
 «DEFINE operand FOR UnaryExpression-»
 «unaryOperator()-»«EXPAND operand FOR this.Operand-»

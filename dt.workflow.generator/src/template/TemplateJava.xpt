@@ -78,15 +78,15 @@ while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statemen
 «ENDDEFINE-»
 
 «DEFINE operand FOR EqualityExpression-»
-(«EXPAND operand FOR this.Operand1-» «comparisonOperator()-» «EXPAND operand FOR this.Operand2-») 
+«EXPAND operand FOR this.Operand1-» «comparisonOperator()-» «EXPAND operand FOR this.Operand2-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR ArithmeticExpression-»
-(«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-»)
+«EXPAND operand FOR this.Operand1-» «arithmeticOperator()-» «EXPAND operand FOR this.Operand2-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR LogicExpression-»
-(«EXPAND operand FOR this.Operand1-» «logicalOperator()-» «EXPAND operand FOR this.Operand2-»)
+«EXPAND operand FOR this.Operand1-» «logicalOperator()-» «EXPAND operand FOR this.Operand2-»
 «ENDDEFINE-»
 
 «DEFINE operand FOR ProcedureCall»
@@ -98,9 +98,9 @@ while(«EXPAND statement FOR Condition-»){«EXPAND statement FOREACH Body.Statemen
 «ENDDEFINE-»
 
 «DEFINE operand FOR Constant-»
-«IF asInteger.length != 0» «asInteger-»
-«ELSEIF asReal.length != 0» «asReal-»
-«ELSEIF asString.length != 0» "«asString-»"
-«ELSEIF asInteger.length == 0 && asReal.length == 0 && asString.length==0» «asBoolean.toString()-»
+«IF asInteger.length.toString() != "null"» «asInteger.toString()-»
+«ELSEIF asReal.length.toString() != "null"» «asReal.toString()-»
+«ELSEIF asString.length.toString() != "null"» «valueString()-»
+«ELSEIF asInteger.length.toString() == "null" && asReal.length.toString() == "null" && asString.length.toString() == "null"» «asBoolean.toString()-»
 «ENDIF-»
 «ENDDEFINE-»

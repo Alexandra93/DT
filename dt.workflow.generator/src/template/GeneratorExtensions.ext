@@ -14,9 +14,9 @@ String arithmeticOperator( workflow::ArithmeticExpression arithmeticOperator):
 	switch 
 	{ 
 		case arithmeticOperator.metaType.toString() == "workflow::Addition" : '+'
-		case arithmeticOperator.metaType.toString() == "workflow::Substraction": '-'
-	    case arithmeticOperator.metaType.toString() == "workflow::Multiplication": '/'
-	    case arithmeticOperator.metaType.toString() == "workflow::Division": '*'
+		case arithmeticOperator.metaType.toString() == "workflow::Subtraction": '-'
+	    case arithmeticOperator.metaType.toString() == "workflow::Multiplication": '*'
+	    case arithmeticOperator.metaType.toString() == "workflow::Division": '/'
 	    default : 'not defined'
 	};
 
@@ -64,6 +64,7 @@ String typesInPython( workflow::Type type):
 switch 
 	{ 
 		case type.toString() == "string" : 'str'
+		case type.toString() == "boolean" : 'bool'
 	    default : type.toString()
 	};
 	
@@ -76,5 +77,12 @@ switch
 		case type.toString() == "float" : '0'
 		case type.toString() == "string" : '""'
 		case type.toString() == "boolean" : 'true'
+		default : 'not defined'
+	};
+	
+String valueString (workflow::Constant constant):
+switch
+	{
+		case constant.asString.length.toString() != "null" : '"' + constant.asString + '"'
 		default : 'not defined'
 	};
